@@ -2,7 +2,7 @@ import { useState } from "react";
 import * as React from "react";
 import Form from "../utilities/Forms";
 import { useNavigate } from "react-router";
-import { loginUser } from "../utilities/loaders";
+import { login } from "../utilities/loaders";
 import {
   Button,
   FormControl,
@@ -19,8 +19,11 @@ import {
   Text,
   useToast,
 } from "@chakra-ui/react";
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
-export default function LoginForm({ setUserTypeState, setIsLoggedInState }) {
+
+
+export default function LoginForm() {
   const [dni, setDni] = useState("");
   const [password, setPassword] = useState("");
   const [validate, setValidate] = useState({});
@@ -28,6 +31,7 @@ export default function LoginForm({ setUserTypeState, setIsLoggedInState }) {
   const navigate = useNavigate();
   const toast = useToast();
   const toastIdRef = React.useRef();
+  const [loading, setLoading] = useState(false);
 
   React.useEffect(() => {
     if (localStorage.getItem("isLoggedIn") === "true") navigate("/");
@@ -108,7 +112,7 @@ export default function LoginForm({ setUserTypeState, setIsLoggedInState }) {
   const handleRegister = () => {
     navigate("/register", { replace: true });
   };
-  
+
   return (
     <>
       <Stack
@@ -152,10 +156,12 @@ export default function LoginForm({ setUserTypeState, setIsLoggedInState }) {
                   required
                   onChange={(e) => setPassword(e.target.value)}
                 />
-                <InputRightElement width="4.5rem">
-                  <Button h="1.75rem" size="sm" onClick={handleShowPassword}>
-                    {show ? "Ocultar" : "Mostrar"}
-                  </Button>
+                <InputRightElement width='4.5rem'>
+                  <Flex onClick={handleShowPassword}>
+                    {show ?
+                      <ViewIcon w={6} h={6} _hover={{ cursor: "pointer" }} mt="25%" ml="25%" /> :
+                      <ViewOffIcon w={6} h={6} _hover={{ cursor: "pointer" }} mt="25%" ml="25%" />}
+                  </Flex>
                 </InputRightElement>
               </InputGroup>
             </FormControl>

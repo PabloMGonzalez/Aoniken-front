@@ -3,10 +3,11 @@ export const BASE_URL = "http://localhost:9300/";
 
 export const loginURL = BASE_URL.concat("login/");
 export const logoutURL = BASE_URL.concat("logout/");
+export const registerUserURL = BASE_URL.concat("customuser/");
 // export const cursosURL = BASE_URL.concat("curso/");
 // export const userURL = BASE_URL.concat("user/");
 // export const recoverPasswordURL = BASE_URL.concat("recoverpassword/");
-// export const registerUserURL = BASE_URL.concat("customuser/");
+
 // export const forgotPasswordURL = BASE_URL.concat("forgotpassword/");
 // export const activateAccountURL = BASE_URL.concat("activateaccount/");
 // export const getUserInfoURL = BASE_URL.concat("getuserinfo/")

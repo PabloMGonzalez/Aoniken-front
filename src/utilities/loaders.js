@@ -1,21 +1,9 @@
 import { axiosLoggedInConfig, axiosLoggedOutConfig } from "./defaultConfig";
 
 import {
-  forgotPasswordURL,
-  logoutURL,
-  loginURL,
-  loginAfipURL,
-  userURL,
-  registerUserURL,
-  activateAccountURL,
-  recoverPasswordURL,
-  oldProfileURL,
-  userProfileURL,
-  getUserInfoURL,
-  recoveryPasswordURL,
+  loginURL,  
+  registerUserURL,  
 } from "./urls";
-
-
 
 
 export const register = async (data) => {
