@@ -24,7 +24,7 @@ import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
 
 export default function LoginForm() {
-  const [dni, setDni] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [validate, setValidate] = useState({});
   const [show, setShow] = useState(false);
@@ -63,15 +63,15 @@ export default function LoginForm() {
     let isValid = true;
 
     let validator = Form.validator({
-      dni: {
-        value: dni,
+      email: {
+        value: email,
         minLength: 6,
         isRequired: true,
       },
       password: {
         value: password,
         isRequired: true,
-        minLength: 6,
+        minLength: 4,
       },
     });
 
@@ -88,9 +88,8 @@ export default function LoginForm() {
   const sendUser = async () => {
 
     const formData = {};
-    formData.dni = dni;
     formData.password = password;
-    formData.email = "";
+    formData.email = email;
     try {
       const res = await login(formData);
       setLoading(false);
@@ -138,11 +137,16 @@ export default function LoginForm() {
               INGRESAR
             </Heading>
             <Flex zIndex={2}>
-              <Text as="b">Documento &nbsp;</Text>
+              <Text as="b">Email &nbsp;</Text>
             </Flex>
-            <NumberInput required marginBottom={7} onChange={(e) => setDni(e)} zIndex={2}>
-              <NumberInputField />
-            </NumberInput>
+            <Input
+              pr="4.5rem"
+              type={"email"}
+              placeholder="Ingresar email"
+              required    
+              onChange={(e) => setEmail(e.target.value)}
+       
+            />
             <FormControl>
               <Flex>
                 <Text as="b">Contraseña &nbsp;</Text>
