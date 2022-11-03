@@ -12,9 +12,7 @@ import {
   Image,
   Input,
   InputGroup,
-  InputRightElement,
-  NumberInput,
-  NumberInputField,
+  InputRightElement,  
   Stack,
   Text,
   useToast,
@@ -139,6 +137,7 @@ export default function LoginForm() {
             <Heading fontSize={"xl"} marginBottom={"10%"} marginTop={2} textAlign={'center'}>
               INGRESAR
             </Heading>
+            <FormControl>
             <Flex zIndex={2}>
               <Text as="b">Email &nbsp;</Text>
             </Flex>
@@ -150,7 +149,7 @@ export default function LoginForm() {
               onChange={(e) => setEmail(e.target.value)}
 
             />
-            <FormControl>
+           
               <Flex>
                 <Text as="b">Contraseña &nbsp;</Text>
               </Flex>
