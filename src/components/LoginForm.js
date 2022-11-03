@@ -117,7 +117,6 @@ export default function LoginForm() {
     <>
       <Stack
         minH={"100vh"}
-        direction={{ base: "column-reverse", md: "row" }}
       >
         <Flex
           p={8}
