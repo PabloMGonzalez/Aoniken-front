@@ -20,6 +20,8 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
+import Header from './Header.tsx'
+
 
 
 
@@ -33,9 +35,9 @@ export default function LoginForm() {
   const toastIdRef = React.useRef();
   const [loading, setLoading] = useState(false);
 
-  React.useEffect(() => {
-    if (localStorage.getItem("isLoggedIn") === "true") navigate("/");
-  }, []);
+  // React.useEffect(() => {
+  //   if (localStorage.getItem("isLoggedIn") === "true") navigate("/posts");
+  // }, []);
 
   const handleShowPassword = () => {
     setShow(!show);
@@ -114,6 +116,7 @@ export default function LoginForm() {
 
   return (
     <>
+      <Header />
       <Stack
         minH={"100vh"}
       >
@@ -143,9 +146,9 @@ export default function LoginForm() {
               pr="4.5rem"
               type={"email"}
               placeholder="Ingresar email"
-              required    
+              required
               onChange={(e) => setEmail(e.target.value)}
-       
+
             />
             <FormControl>
               <Flex>
