@@ -13,11 +13,20 @@ function App() {
 
     <BrowserRouter>
       <Routes>
-        <Route element={<Home/>} path="/" />
-        <Route element={<PostForm />} path="/posts" />
+
+        {/* USER */}
         <Route element={<LoginForm />} path="/login" />
         <Route element={<RegisterForm />} path="/register" />
-        <Route element={<ListPosts/>} path="listar_posts"/>
+
+
+        {/* POST */}
+        <Route element={<Home />} path="/" />
+        <Route element={<Home />} path="/home" />
+        <Route element={<PostForm />} path="/create_post" />
+        <Route element={<ListPosts />} path="listar_posts" />
+        {/* COMMENT */}
+
+
       </Routes >
     </BrowserRouter>
 

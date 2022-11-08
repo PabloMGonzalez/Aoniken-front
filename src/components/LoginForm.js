@@ -96,7 +96,7 @@ export default function LoginForm() {
       setLoading(false);
       if (res.status === 200) {
         console.log("Estado del logueo: " + localStorage.getItem("isLoggedIn"));
-        navigate('/listar_posts/')
+        navigate('/')
       }
 
     } catch (error) {

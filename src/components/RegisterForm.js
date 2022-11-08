@@ -68,7 +68,7 @@ function SignUp() {
 
       const response = await register(formData)
       if (response.status === 200) {
-        navigate('/listar_posts')
+        navigate('/')
       }
       else {
         messageError("Error: Email ya registrado.")
