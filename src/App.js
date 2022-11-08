@@ -17,7 +17,7 @@ function App() {
         <Route element={<PostForm />} path="/posts" />
         <Route element={<LoginForm />} path="/login" />
         <Route element={<RegisterForm />} path="/register" />
-        <Route element={<ListPosts/>} path="listar"/>
+        <Route element={<ListPosts/>} path="listar_posts"/>
       </Routes >
     </BrowserRouter>
 

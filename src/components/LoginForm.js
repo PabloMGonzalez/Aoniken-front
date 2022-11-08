@@ -2,7 +2,7 @@ import { useState } from "react";
 import * as React from "react";
 import Form from "../utilities/Forms";
 import { useNavigate } from "react-router";
-import { login } from "../utilities/loaders";
+import { login,test } from "../utilities/loaders";
 import {
   Button,
   FormControl,
@@ -91,7 +91,7 @@ export default function LoginForm() {
     formData.password = password;
     formData.email = email;
     try {
-      const res = await login(formData);
+      const res = await login();
       setLoading(false);
       if (res.status === 200) {
         console.log("Estado del logueo: " + localStorage.getItem("isLoggedIn"));
