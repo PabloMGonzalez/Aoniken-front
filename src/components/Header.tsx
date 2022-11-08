@@ -32,11 +32,11 @@ export default function Header() {
         borderColor={useColorModeValue('gray.200', 'gray.900')}
       >
         <Stack
-          ml={'105em'}
+          ml={'auto'}
           direction={'row'}
           spacing={6}>
-{/* 
-          {localStorage.getItem('isLoggedIn') && <Button
+
+          {/* {localStorage.getItem('isLoggedIn') && <Button
             display={{ base: 'none', md: 'inline-flex' }}
             fontSize={'sm'}
             fontWeight={600}
@@ -60,9 +60,9 @@ export default function Header() {
             }}
             onClick={() => navigate("/register")}>
             Sign Up
-          </Button>}
+          </Button>} */}
 
-          {!localStorage.getItem('isLoggedIn') && <Button
+           <Button
             display={{ base: 'none', md: 'inline-flex' }}
             fontSize={'sm'}
             fontWeight={600}
@@ -73,7 +73,7 @@ export default function Header() {
             }}
             onClick={handleLogout}>
             Log Out
-          </Button>} */}
+          </Button>
 
         </Stack>
       </Flex>
