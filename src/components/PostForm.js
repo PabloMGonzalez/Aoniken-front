@@ -6,56 +6,47 @@ import {
   FormLabel,
   Input,
   Heading,
-  HStack, 
+  HStack,
   Text,
   useColorModeValue,
-  Textarea, 
+  Textarea,
   Button
 
 } from "@chakra-ui/react";
 import { useState } from 'react';
 import Header from './Header.tsx';
 import { createPost } from '../utilities/loaders';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 function PostForm() {
 
   const titleColor = useColorModeValue("blue.800", "teal.200");
   const textColor = useColorModeValue("gray.400", "white");
 
-  const [title,setTitle] = useState()
-  const [content,setContent] = useState()
-  const [userId,setUserId] = useState()
+  const [title, setTitle] = useState();
+  const [content, setContent] = useState();
+  const [user_id, setUserId] = useState();
 
+  const navigate = useNavigate();
 
 
   const sendPost = async () => {
 
     const formData = {};
-    formData.password = title;
+    formData.title = title;
     formData.content = content;
-    formData.userId = 14;
+    formData.user_id = localStorage.getItem('user_id');
 
     try {
       const res = await createPost(formData);
-      setLoading(false);
-      if (res.status === 200) {
-        console.log("Estado del logueo: " + localStorage.getItem("isLoggedIn"));
+      if (res.status === 200) {       
         navigate('/')
       }
-
     } catch (error) {
-      toastIdRef.current = toast({
-        position: 'bottom-left',
-        description: 'DNI o contraseña incorrectos.',
-        status: 'error',
-        isClosable: true,
-      })
-      setPassword("");
+      console.log(error)
     }
   };
-  const handleRegister = () => {
-    navigate("/register", { replace: true });
-  };
+
 
   return (
     <>
@@ -104,16 +95,16 @@ function PostForm() {
                       placeholder='Titulo del post'
                       mb='24px'
                       size='lg'
-                      onChange={(e) => setTitle(e.target.value)}                      
+                      onChange={(e) => setTitle(e.target.value)}
                     />
                   </Box>
-                  </HStack>
-                  <HStack w="100%" spacing={3}>
+                </HStack>
+                <HStack w="100%" spacing={3}>
                   <Box w="75%">
                     <FormLabel ms='4px' fontSize='sm' fontWeight='normal'>
                       Descripcion
                     </FormLabel>
-                    <Textarea 
+                    <Textarea
                       id='content'
                       fontSize='sm'
                       ms='4px'
@@ -124,18 +115,19 @@ function PostForm() {
                       onChange={(e) => setContent(e.target.value)}
                     />
                   </Box>
-                  </HStack>
-                  <Button
-                colorScheme={"blue"}
-                variant={"solid"} 
-              >
-                Enviar
-              </Button>
+                </HStack>
+                <Button
+                  colorScheme={"blue"}
+                  variant={"solid"}
+                  onClick={sendPost}
+                >
+                  Enviar
+                </Button>
               </FormControl>
             </Flex>
           </Flex>
         </Flex>
-      </Flex>      
+      </Flex>
     </>
 
   );
