@@ -21,8 +21,9 @@ export const login = async (data) => {
   try {
     const response = await axiosLoggedInConfig().post(loginURL, data);
     localStorage.setItem("isLoggedIn", true);
-    localStorage.setItem("lgac", response.data.access);
-    localStorage.setItem("lgrf", response.data.refresh);
+    localStorage.setItem("lgac", response.data.result);
+    localStorage.setItem("lgrf", response.data.result);
+    localStorage.setItem("user_id", response.data.id);
     return response;
   } catch (error) {
     console.log(error);
