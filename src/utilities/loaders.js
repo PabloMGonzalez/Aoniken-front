@@ -1,6 +1,7 @@
 import { axiosLoggedInConfig, axiosLoggedOutConfig } from "./defaultConfig";
 
 import {
+  createPostURL,
   loginURL,  
   registerUserURL, 
   testURL, 
@@ -28,6 +29,15 @@ export const login = async (data) => {
   }
 }
 
+export const logout = async (setIsLoggedInState, setUserTypeState) => {
+  try {
+    localStorage.setItem("isLoggedIn", false);
+    localStorage.setItem("lgac", "null");
+    localStorage.setItem("lgrf", "null");
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 
 export const test = async () => {
@@ -38,15 +48,16 @@ export const test = async () => {
     console.log(error);
   }
 }
- export const logout = async (setIsLoggedInState, setUserTypeState) => {
-   try {
-     localStorage.setItem("isLoggedIn", false);
-     localStorage.setItem("lgac", "null");
-     localStorage.setItem("lgrf", "null");
-   } catch (error) {
-     console.log(error);
-   }
- }
+
+
+export const createPost = async (data) => {
+  try {
+    const response = await axiosLoggedInConfig().post(createPostURL, data);  
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 
 // export const loginAfip = async (data) => {

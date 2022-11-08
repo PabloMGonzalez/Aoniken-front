@@ -14,19 +14,48 @@ import {
 
 } from "@chakra-ui/react";
 import { useState } from 'react';
-import Header from './Header.tsx'
+import Header from './Header.tsx';
+import { createPost } from '../utilities/loaders';
 
 function PostForm() {
 
   const titleColor = useColorModeValue("blue.800", "teal.200");
   const textColor = useColorModeValue("gray.400", "white");
 
+  const [title,setTitle] = useState()
+  const [content,setContent] = useState()
+  const [userId,setUserId] = useState()
 
-  const [post, setPost] = useState({
-    title: "", 
-    content:","
-  });
 
+
+  const sendPost = async () => {
+
+    const formData = {};
+    formData.password = title;
+    formData.content = content;
+    formData.userId = 14;
+
+    try {
+      const res = await createPost(formData);
+      setLoading(false);
+      if (res.status === 200) {
+        console.log("Estado del logueo: " + localStorage.getItem("isLoggedIn"));
+        navigate('/')
+      }
+
+    } catch (error) {
+      toastIdRef.current = toast({
+        position: 'bottom-left',
+        description: 'DNI o contraseña incorrectos.',
+        status: 'error',
+        isClosable: true,
+      })
+      setPassword("");
+    }
+  };
+  const handleRegister = () => {
+    navigate("/register", { replace: true });
+  };
 
   return (
     <>
@@ -37,8 +66,7 @@ function PostForm() {
           w='100%'
           maxW='1044px'
           mx='auto'
-          ml='33em'
-
+          ml='26em'
         >
           <Flex
             alignItems='center'
@@ -69,38 +97,31 @@ function PostForm() {
                       Titulo
                     </FormLabel>
                     <Input
-                      id='nombre'
+                      id='title'
                       fontSize='sm'
                       ms='4px'
                       borderRadius='5px'
                       placeholder='Titulo del post'
                       mb='24px'
                       size='lg'
-                      onChange={(e) => {
-                        setPost({ ...post, title: e.target.value });
-                      }
-                      }
+                      onChange={(e) => setTitle(e.target.value)}                      
                     />
                   </Box>
                   </HStack>
                   <HStack w="100%" spacing={3}>
-
                   <Box w="75%">
                     <FormLabel ms='4px' fontSize='sm' fontWeight='normal'>
                       Descripcion
                     </FormLabel>
                     <Textarea 
-                      id='nombre'
+                      id='content'
                       fontSize='sm'
                       ms='4px'
                       borderRadius='5px'
                       placeholder='Cuerpo del post'
                       mb='24px'
                       size='lg'
-                      onChange={(e) => {
-                        setPost({ ...post, content: e.target.value });
-                      }
-                      }
+                      onChange={(e) => setContent(e.target.value)}
                     />
                   </Box>
                   </HStack>
@@ -114,12 +135,9 @@ function PostForm() {
             </Flex>
           </Flex>
         </Flex>
-      </Flex>
-
-      );
+      </Flex>      
     </>
 
   );
 }
-
 export default PostForm;

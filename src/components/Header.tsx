@@ -19,8 +19,6 @@ export default function Header() {
     navigate('/')
   }
 
-
-
   return (
     <Box>
       <Flex
@@ -33,11 +31,11 @@ export default function Header() {
         borderStyle={'solid'}
         borderColor={useColorModeValue('gray.200', 'gray.900')}
       >
-        {/* <Stack
+        <Stack
           ml={'105em'}
           direction={'row'}
           spacing={6}>
-
+{/* 
           {localStorage.getItem('isLoggedIn') && <Button
             display={{ base: 'none', md: 'inline-flex' }}
             fontSize={'sm'}
@@ -51,7 +49,7 @@ export default function Header() {
             Log In
           </Button>}
 
-          {!localStorage.getItem('isLoggedIn') && <Button
+          {localStorage.getItem('isLoggedIn') && <Button
             display={{ base: 'none', md: 'inline-flex' }}
             fontSize={'sm'}
             fontWeight={600}
@@ -75,9 +73,9 @@ export default function Header() {
             }}
             onClick={handleLogout}>
             Log Out
-          </Button>}
+          </Button>} */}
 
-        </Stack> */}
+        </Stack>
       </Flex>
 
     </Box>
