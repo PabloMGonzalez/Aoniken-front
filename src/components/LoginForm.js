@@ -90,8 +90,9 @@ export default function LoginForm() {
     const formData = {};
     formData.password = password;
     formData.email = email;
+
     try {
-      const res = await login();
+      const res = await login(formData);
       setLoading(false);
       if (res.status === 200) {
         console.log("Estado del logueo: " + localStorage.getItem("isLoggedIn"));
