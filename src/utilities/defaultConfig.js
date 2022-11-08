@@ -24,7 +24,7 @@ export const axiosLoggedInConfig = () => {
   );
 
   const refreshAuthLogic = async (failedRequest) => {
-    const refreshToken = localStorage.getItem('lgrf');
+    const refreshToken = localStorage.getItem('lgac');
     if (refreshToken !== null) {
       return axios
         .post(
