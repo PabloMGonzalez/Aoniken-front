@@ -27,11 +27,10 @@ import Header from './Header.tsx'
 
 function SignUp() {
 
-  const [usuario, setUsuario] = useState({
-    nombre: "",
-    email: "",
-    password: "",
-  });
+
+  const [nombre, setNombre] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const [passConfirmation, setPassConfirmation] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -41,7 +40,7 @@ function SignUp() {
   const toastIdRef = useRef();
 
   const handleRegistro = () => {
-    if (passConfirmation !== usuario.password) {
+    if (passConfirmation !== password) {
       messageError("Las contraseñas no coinciden");
       return;
     }
@@ -61,13 +60,15 @@ function SignUp() {
     const validate = validateRegister();
 
     if (validate) {
-      const formData = new FormData();
-      formData.append("first_name", usuario["nombre"]);
-      formData.append("email", usuario["email"]);
-      formData.append("password", usuario["pass word"]);
+
+      const formData = {};
+      formData.nombre = nombre;
+      formData.password = password;
+      formData.email = email;
+
       const response = await register(formData)
-      if (response.status === 201) {
-        navigate('/posts')
+      if (response.status === 200) {
+        navigate('/listar_posts')
       }
       else {
         messageError("Error: Email ya registrado.")
@@ -79,17 +80,17 @@ function SignUp() {
   const validateRegister = () => {
     let isValid = true;
 
-    if (usuario.nombre === "" || usuario.nombre.length < 3 || usuario.nombre.length > 50) {
+    if (nombre === "" || nombre.length < 3 || nombre.length > 50) {
       isValid = false;
       messageError("El nombre debe tener entre 3 y 50 caracteres");
       return
     }
-    if (validateEmail(usuario.email) === false) {
+    if (validateEmail(email) === false) {
       isValid = false;
       messageError("El email no es valido");
       return
     }
-    if (usuario.password.length < 4 || usuario.password.length > 20) {
+    if (password.length < 4 || password.length > 20) {
       isValid = false;
       messageError("La contraseña debe tener entre 6 y 20 caracteres");
       return
@@ -163,10 +164,8 @@ function SignUp() {
                       placeholder='Nombre'
                       mb='24px'
                       size='lg'
-                      onChange={(e) => {
-                        setUsuario({ ...usuario, nombre: e.target.value });
-                      }
-                      }
+                      onChange={(e) => setNombre(e.target.value)}
+                      
                     />
                   </Box>
                 </HStack>
@@ -182,9 +181,8 @@ function SignUp() {
                   placeholder='Tu email'
                   mb='24px'
                   size='lg'
-                  onChange={(e) =>
-                    setUsuario({ ...usuario, email: e.target.value })
-                  }
+                  onChange={(e) => setEmail(e.target.value)}
+
                 />
                 <HStack w="100%" spacing={3}>
                   <Box w="50%">
@@ -201,9 +199,7 @@ function SignUp() {
                         placeholder='Tu contraseña'
                         mb='24px'
                         size='lg'
-                        onChange={(e) =>
-                          setUsuario({ ...usuario, password: e.target.value })
-                        }
+                        onChange={(e) => setPassword(e.target.value)}
                       />
                       <InputRightElement width='4.5rem'>
                         <Flex onClick={handleShowPassword}>
