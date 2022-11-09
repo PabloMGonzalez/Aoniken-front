@@ -14,9 +14,9 @@ import {
 
 } from "@chakra-ui/react";
 import { useState } from 'react';
-import Header from './Header.tsx';
+import Header from './Header.js';
 import { createPost } from '../utilities/loaders';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function PostForm() {
 

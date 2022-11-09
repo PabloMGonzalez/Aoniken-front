@@ -9,7 +9,7 @@ import {
     TableCaption,
     TableContainer,
 } from '@chakra-ui/react'
-import Header from './Header.tsx'
+import Header from './Header.js'
 
 import React from 'react';
 

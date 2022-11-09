@@ -15,18 +15,26 @@ import {
   useToast,
   Text,
   useColorModeValue,
-
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+  useDisclosure
 
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { useState, useRef } from "react";
 import { register } from "../utilities/loaders";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
-import Header from './Header.tsx'
+import Header from './Header.js'
+
 
 
 function SignUp() {
 
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
@@ -68,7 +76,9 @@ function SignUp() {
 
       const response = await register(formData)
       if (response.status === 200) {
-        navigate('/')
+        onOpen()
+
+        // navigates
       }
       else {
         messageError("Error: Email ya registrado.")
@@ -254,6 +264,35 @@ function SignUp() {
                   }}>
                   <Text fontWeight={'bold'} fontSize={'13px'}>REGISTRARME</Text>
                 </Button>
+
+                <Modal isOpen={isOpen}>
+                <ModalOverlay />
+                <ModalContent>
+                  <ModalHeader>Se ha registrado con éxito</ModalHeader>
+                  <ModalBody>
+                    <p>Se creo el usuario con exito</p>
+                  </ModalBody>
+                  <ModalFooter>
+                    <Button
+                      bg='muni.celeste'
+                      fontSize='10px'
+                      color='white'
+                      fontWeight='bold'
+                      w='100%'
+                      h='45'
+                      mb='24px'
+                      onClick={() => navigate("/login")}
+                      _hover={{
+                        bg: "teal.200",
+                      }}
+                      _active={{
+                        bg: "teal.400",
+                      }}>
+                      <Text fontWeight={'bold'} fontSize={'13px'}>SIGUIENTE</Text>
+                    </Button>
+                  </ModalFooter>
+                </ModalContent>
+              </Modal>
 
               </FormControl>
               <Flex

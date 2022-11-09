@@ -18,7 +18,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
-import Header from './Header.tsx'
+import Header from './Header.js'
 
 
 
