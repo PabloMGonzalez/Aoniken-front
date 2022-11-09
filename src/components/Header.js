@@ -18,11 +18,8 @@ export default function Header() {
   const handleLogout = () => {
     logout();
     console.log("Estado del logueo: " + localStorage.getItem("isLoggedIn"));
-    navigate('/')
-  }
-
-  const createPostButton = () => {
-    navigate('/create_post/')
+    window.location.reload()
+    navigate('/');
   }
 
   const [isLoggedIn, setIsLoggIn] = useLocalStorage('isLoggedIn');
@@ -47,9 +44,23 @@ export default function Header() {
           direction={'reverse-row'}
           spacing={6}>
 
+          <Button
+            display={{ base: 'none', md: 'inline-flex' }}
+            fontSize={'sm'}
+            fontWeight={600}
+            color={'white'}
+            bg={'blue.400'}
+            _hover={{
+              bg: 'green.300',
+            }}
+            onClick={() => { navigate('/home') }}>
+            Home
+          </Button>
+
           {isLoggedIn && <Button
             display={{ base: 'none', md: 'inline-flex' }}
             fontSize={'sm'}
+            mx="25px"
             fontWeight={600}
             color={'white'}
             bg={'blue.400'}
@@ -65,7 +76,6 @@ export default function Header() {
             fontSize={'sm'}
             fontWeight={600}
             color={'white'}
-            ml="1.7em"
             bg={'blue.400'}
             _hover={{
               bg: 'green.300',
