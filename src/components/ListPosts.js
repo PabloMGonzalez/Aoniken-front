@@ -2,62 +2,87 @@ import {
     Table,
     Thead,
     Tbody,
-    Tfoot,
     Tr,
     Th,
     Td,
-    TableCaption,
     TableContainer,
+    Button,
+    Text
 } from '@chakra-ui/react'
 import Header from './Header.js'
+import React, { useEffect } from 'react';
+import { useState } from 'react';
+import { listPosts } from '../utilities/loaders.js';
 
-import React from 'react';
 
 function ListPosts() {
+
+    const [posts, setPosts] = useState();
+
+
+    const selectPosts = async () => {
+        try {
+            const res = await listPosts();
+            if (res.status === 200) {
+                setPosts(res.data)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    };
+    useEffect(() => {
+        selectPosts()
+
+    }, []);
+
     return (
         <>
             <Header />
-
-            <TableContainer w="50%"
+            <TableContainer w="100%"
                 justify={"center"}
-
                 maxW='1044px'
                 mx='auto'
-                ml='33em'
-                mt='2em'>
+            >
                 <Table variant='striped' colorScheme='teal'>
-                    <TableCaption>Imperial to metric conversion factors</TableCaption>
                     <Thead>
                         <Tr>
-                            <Th>To convert</Th>
-                            <Th>into</Th>
-                            <Th isNumeric>multiply by</Th>
+                            <Th>Id</Th>
+                            <Th>Titulo</Th>
+                            <Th>Contenido</Th>
+                            <Th>Nombre</Th>
                         </Tr>
                     </Thead>
                     <Tbody>
-                        <Tr>
-                            <Td>inches</Td>
-                            <Td>millimetres (mm)</Td>
-                            <Td isNumeric>25.4</Td>
-                        </Tr>
-                        <Tr>
-                            <Td>feet</Td>
-                            <Td>centimetres (cm)</Td>
-                            <Td isNumeric>30.48</Td>
-                        </Tr>
-                        <Tr>
-                            <Td>yards</Td>
-                            <Td>metres (m)</Td>
-                            <Td isNumeric>0.91444</Td>
-                        </Tr>
+                        {posts && posts.map((post) => (
+                            <Tr key="post.id">
+                                <Td fontSize="sm"
+                                width={"10px"}
+                                >{post.id}
+                                </Td>
+
+                                  <Td fontSize="sm"
+                                   width={"30px"}
+                                > {post.title}
+                                </Td>
+
+
+                                <Td fontSize="sm"                                   
+                                > 
+                                
+                                <Text width={"10px"}>
+                                {post.content}
+                                </Text>
+
+
+
+                                </Td>
+                                <Td fontSize="sm"
+                                >{post.nombre}
+                                </Td>
+                            </Tr>
+
+                        ))}
                     </Tbody>
-                    <Tfoot>
-                        <Tr>
-                            <Th>To convert</Th>
-                            <Th>into</Th>
-                            <Th isNumeric>multiply by</Th>
-                        </Tr>
-                    </Tfoot>
                 </Table>
             </TableContainer>
         </>

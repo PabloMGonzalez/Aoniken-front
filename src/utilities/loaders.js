@@ -5,8 +5,17 @@ import {
   loginURL,
   registerUserURL,
   testURL,
+  listPostsURL,
 } from "./urls";
 
+export const test = async () => {
+  try {
+    const response = await axiosLoggedOutConfig.get(testURL);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 export const register = async (data) => {
   try {
@@ -42,16 +51,6 @@ export const logout = async (setIsLoggedInState, setUserTypeState) => {
 }
 
 
-export const test = async () => {
-  try {
-    const response = await axiosLoggedOutConfig.get(testURL);
-    return response;
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-
 export const createPost = async (data) => {
   try {
     const response = await axiosLoggedInConfig().post(createPostURL, data);
@@ -60,6 +59,17 @@ export const createPost = async (data) => {
     console.log(error);
   }
 }
+
+ export const listPosts = async () => {
+   try {
+     const response = await axiosLoggedInConfig().get(listPostsURL);
+     return response;
+   } catch (error) {
+     console.log(error);
+   }
+ }
+
+
 
 
 // export const loginAfip = async (data) => {
@@ -74,14 +84,7 @@ export const createPost = async (data) => {
 //   }
 // }
 
-// export const getOldProfile = async (data) => {
-//   try {
-//     const response = await axiosLoggedInConfig().get(oldProfileURL, data);
-//     return response;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
+
 
 // export const patchUser = async (data, id) => {
 //   try {

@@ -7,6 +7,7 @@ export const loginURL = BASE_URL.concat("user/login/");
 export const registerUserURL = BASE_URL.concat("user/register/");
 
 //POST
+export const listPostsURL = BASE_URL.concat("post/listar_post")
 export const createPostURL = BASE_URL.concat("post/create_post/");
 
 
