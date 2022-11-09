@@ -39,7 +39,7 @@ export const login = async (data) => {
   }
 }
 
-export const logout = async (setIsLoggedInState, setUserTypeState) => {
+export const logout = async () => {
   try {
     localStorage.setItem("isLoggedIn", false);
     localStorage.setItem("lgac", "null");

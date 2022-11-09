@@ -15,13 +15,14 @@ import Header from './Header.js'
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { listPosts } from '../utilities/loaders.js';
-import { CheckIcon } from '@chakra-ui/icons';
+import { useNavigate } from "react-router";
+
 
 
 function ListPosts() {
 
     const [posts, setPosts] = useState();
-
+    const navigate = useNavigate();
 
     const selectPosts = async () => {
         try {
@@ -35,15 +36,12 @@ function ListPosts() {
     };
     useEffect(() => {
         selectPosts()
-
     }, []);
 
     return (
         <>
             <Header />
-
             {posts && posts.map((post) => (
-
                 <Center py={6}>
                     <Box
                         maxW={'660px'}
@@ -51,7 +49,7 @@ function ListPosts() {
                         boxShadow={'2xl'}
                         rounded={'md'}
                         overflow={'hidden'}>
-                        <Text p={2}>#{post.id}</Text>
+                        <Text p={2} fontSize={"sm"}>#{post.id}</Text>
                         <Stack
                             textAlign={'center'}
                             p={6}
@@ -66,44 +64,52 @@ function ListPosts() {
                             </Text>
                             <Divider />
                             <Stack direction={'row'} align={'center'} justify={'center'}>
-                                <Text fontSize={'md'} pt={2} >
+                                <Text fontSize={'md'} py={7} >
                                     {post.content}
                                 </Text>
                             </Stack>
                         </Stack>
-                        <Text>Autor:{post.nombre}</Text>
-                        <Box bg={'gray.300'} px={6} py={10}>
-                            <HStack>
+
+                        <Text
+                            fontSize={'sm'}
+                            align={'right'}
+                            mr={"10px"}
+                            mb={"10px"}>
+                            Autor:{post.nombre}
+                        </Text>
+                        <Box bg={'blue.50'}
+                            borderTop={1}
+                            borderStyle={'solid'}
+                            px={6}
+                            py={10}>
+                            <HStack
+                                align={'center'}
+                                justify={'center'}>
                                 <Button
-                                    w={'full'}
-                                    bg={'green.400'}
+                                    w={'30%'}
                                     color={'white'}
                                     rounded={'xl'}
-                                    boxShadow={'0 5px 20px 0px rgb(72 187 120 / 43%)'}
+                                    bg={'blue.400'}
                                     _hover={{
-                                        bg: 'green.500',
+                                        bg: 'green.300',
                                     }}
-                                    _focus={{
-                                        bg: 'green.500',
-                                    }}>
+                                    onClick={() => { navigate('/post/approve_post/' + post.id) }}
+                                >
                                     Aprobar
                                 </Button>
                                 <Button
-                                    w={'full'}
-                                    bg={'green.400'}
+                                    w={'30%'}
                                     color={'white'}
                                     rounded={'xl'}
-                                    boxShadow={'0 5px 20px 0px rgb(72 187 120 / 43%)'}
+                                    bg={'blue.400'}
                                     _hover={{
-                                        bg: 'green.500',
+                                        bg: 'green.300',
                                     }}
-                                    _focus={{
-                                        bg: 'green.500',
-                                    }}>
+                                    onClick={() => { navigate('/post/reject_post/' + post.id) }}
+                                >
                                     Rechazar
                                 </Button>
                             </HStack>
-
                         </Box>
                     </Box>
                 </Center>

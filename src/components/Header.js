@@ -19,7 +19,8 @@ export default function Header() {
     logout();
     console.log("Estado del logueo: " + localStorage.getItem("isLoggedIn"));
     window.location.reload()
-    navigate('/');
+    navigate('/home');
+
   }
 
   const [isLoggedIn, setIsLoggIn] = useLocalStorage('isLoggedIn');
