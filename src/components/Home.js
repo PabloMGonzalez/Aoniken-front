@@ -8,16 +8,17 @@ import {
     FormControl,
     FormLabel,
     Textarea,
-    HStack
+
 } from '@chakra-ui/react'
 import Header from './Header.js'
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { listPosts } from '../utilities/loaders.js';
+import { createComment, listPosts } from '../utilities/loaders.js';
+
 
 function Home() {
 
-
+    const [content, setContent] = useState("");
     const [posts, setPosts] = useState();
 
     const selectPosts = async () => {
@@ -33,6 +34,22 @@ function Home() {
     useEffect(() => {
         selectPosts()
     }, []);
+
+
+    const handleComment = async (e) => {
+
+        const formData = {}
+        formData.user_id = localStorage.getItem("user_id");
+        formData.post_id= e.target.id;
+        formData.content = content;
+        console.log(formData)
+        const response = await createComment(formData)
+        if (response.status === 200) {
+            console.log(response)
+        }
+
+    }
+
 
 
     return (
@@ -84,9 +101,12 @@ function Home() {
                                 <Textarea
                                     mb="1em"
                                     bg={"white"}
+                                    onChange={(e) => setContent(e.target.value)}
                                 >
                                 </Textarea>
-                                <Button>
+                                <Button
+                                    id={post.id}
+                                    onClick={handleComment}>
                                     Enviar comentario
                                 </Button>
                             </FormControl>

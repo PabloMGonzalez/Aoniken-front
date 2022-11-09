@@ -8,6 +8,7 @@ import {
   listPostsURL,
   approvePostURL,
   rejectPostURL,
+  createCommentURL
 } from "./urls";
 
 export const test = async () => {
@@ -62,123 +63,38 @@ export const createPost = async (data) => {
   }
 }
 
- export const listPosts = async () => {
-   try {
-     const response = await axiosLoggedInConfig().get(listPostsURL);
-     return response;
-   } catch (error) {
-     console.log(error);
-   }
- }
+export const listPosts = async () => {
+  try {
+    const response = await axiosLoggedInConfig().get(listPostsURL);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
 
- export const approvePost = async (data) => {
+export const approvePost = async (data) => {
   try {
     const response = await axiosLoggedInConfig().post(approvePostURL, data)
     return response;
   } catch (error) {
     console.log(error);
   }
- }
+}
 
- export const rejectPost = async (data) => {
+export const rejectPost = async (data) => {
   try {
     const response = await axiosLoggedInConfig().post(rejectPostURL, data)
     return response;
   } catch (error) {
     console.log(error);
   }
- }
+}
 
-
-
-// export const loginAfip = async (data) => {
-//   try {
-//     const response = await axiosLoggedOutConfig.get(loginAfipURL + "?token=" + data);
-//     localStorage.setItem("isLoggedIn", true);
-//     localStorage.setItem("lgac", response.data.access);
-//     localStorage.setItem("lgrf", response.data.refresh);
-//     return response;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
-
-
-
-// export const patchUser = async (data, id) => {
-//   try {
-//     const response = await axiosLoggedInConfig().patch(registerUserURL + id + "/", data);
-//     return response;
-//   } catch (error) {
-//     // console.log(error)
-//     return error
-//   }
-// }
-
-
-// export const patchProfile = async (data, id) => {
-//   try {
-//     const response = await axiosLoggedInConfig().patch(userProfileURL + id + "/", data);
-//     return response;
-//   } catch (error) {
-//     console.log(error)
-//   }
-// }
-
-// export const forgotPassword = async (data) => {
-//   try {
-//     const response = await axiosLoggedOutConfig.post(
-//       forgotPasswordURL,
-//       data
-//     );
-//     return response;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
-
-// export const activateAccount = async (data) => {
-//   try {
-//     const response = await axiosLoggedOutConfig.post(activateAccountURL, data);
-//     return response
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
-
-// export const recoverPassword = async (data) => {
-//   try {
-//     const response = await axiosLoggedInConfig().post(recoverPasswordURL, data);
-//     return response
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
-
-// export const getCurrentProfile = async (data) => {
-//   try {
-//     const response = await axiosLoggedInConfig().get(userProfileURL, data);
-//     return response;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
-
-// export const getUserInfo = async (data) => {
-//   try {
-
-//     const response = await axiosLoggedInConfig().get(getUserInfoURL, data);
-//     return response;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
-
-// export const passwordRecovery = async (data) => {
-//   try {
-//     const response = await axiosLoggedInConfig().post(recoveryPasswordURL, data);
-//     return response;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
+export const createComment = async (data) => {
+  try {
+    const response = await axiosLoggedInConfig().post(createCommentURL, data)
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}

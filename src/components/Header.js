@@ -18,8 +18,7 @@ export default function Header() {
   const handleLogout = () => {
     logout();
     console.log("Estado del logueo: " + localStorage.getItem("isLoggedIn"));
-    window.location.reload()
-    navigate('/home');
+    navigate('/login');
 
   }
 
@@ -85,6 +84,19 @@ export default function Header() {
             Listar Posteos
           </Button>}
 
+          {isLoggedIn && <Button
+            display={{ base: 'none', md: 'inline-flex' }}
+            fontSize={'sm'}
+            fontWeight={600}
+            color={'white'}
+            bg={'red.400'}
+            ml={"25px"}
+            _hover={{
+              bg: 'green.300',
+            }}
+            onClick={() => navigate('/editar_post')}>
+            Edit
+          </Button>}
 
 
         </Stack>
