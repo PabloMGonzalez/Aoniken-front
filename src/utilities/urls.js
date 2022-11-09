@@ -10,6 +10,7 @@ export const registerUserURL = BASE_URL.concat("user/register/");
 export const listPostsURL = BASE_URL.concat("post/listar_post");
 export const createPostURL = BASE_URL.concat("post/create_post/");
 export const approvePostURL = BASE_URL.concat("post/approve_post");
+export const rejectPostURL = BASE_URL.concat("post/reject_post")
 
 //COMMENT
 

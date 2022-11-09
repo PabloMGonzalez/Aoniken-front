@@ -1,10 +1,6 @@
 import {
     Center,
-    useColorModeValue,
     Stack,
-    List,
-    ListItem,
-    ListIcon,
     Button,
     Text,
     Box,
@@ -14,15 +10,13 @@ import {
 import Header from './Header.js'
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { approvePost, listPosts } from '../utilities/loaders.js';
-import { useNavigate } from "react-router";
+import { approvePost, listPosts, rejectPost } from '../utilities/loaders.js';
 
 
 
 function ListPosts() {
 
     const [posts, setPosts] = useState();
-    const navigate = useNavigate();
 
     const selectPosts = async () => {
         try {
@@ -39,23 +33,37 @@ function ListPosts() {
     }, []);
 
     const handleApprove = async (e) => {
-        try {            
+        try {
             const formData = {}
             formData.id = e.target.id
             const res = await approvePost(formData);
-            if (res.status === 200) {
-                console.log(res.data)
-            }
+          
+                const removePost= posts.filter((_, i) => i !== e.target.id);
+                setPosts(removePost);
+            console.log(posts);
+
         } catch (error) {
             console.log(error)
         }
     }
-    
+
+    const handleReject = async (e) => {
+        try {
+            const formData = {}
+            formData.id = e.target.id
+            const res = await rejectPost(formData);
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
 
     return (
         <>
+
             <Header />
             {posts && posts.map((post) => (
+                
                 <Center py={6}>
                     <Box
                         maxW={'660px'}
@@ -113,6 +121,7 @@ function ListPosts() {
                                     Aprobar
                                 </Button>
                                 <Button
+                                    id={post.id}
                                     w={'30%'}
                                     color={'white'}
                                     rounded={'xl'}
@@ -120,7 +129,7 @@ function ListPosts() {
                                     _hover={{
                                         bg: 'green.300',
                                     }}
-                                    onClick={() => { navigate('/post/reject_post/' + post.id) }}
+                                    onClick={handleReject}
                                 >
                                     Rechazar
                                 </Button>
