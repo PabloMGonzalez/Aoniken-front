@@ -6,6 +6,7 @@ import {
   registerUserURL,
   testURL,
   listPostsURL,
+  approvePostURL,
 } from "./urls";
 
 export const test = async () => {
@@ -69,6 +70,14 @@ export const createPost = async (data) => {
    }
  }
 
+ export const approvePost = async (data) => {
+  try {
+    const response = await axiosLoggedInConfig().post(approvePostURL, data)
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+ }
 
 
 

@@ -14,7 +14,7 @@ import {
 import Header from './Header.js'
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { listPosts } from '../utilities/loaders.js';
+import { approvePost, listPosts } from '../utilities/loaders.js';
 import { useNavigate } from "react-router";
 
 
@@ -37,6 +37,20 @@ function ListPosts() {
     useEffect(() => {
         selectPosts()
     }, []);
+
+    const handleApprove = async (e) => {
+        try {            
+            const formData = {}
+            formData.id = e.target.id
+            const res = await approvePost(formData);
+            if (res.status === 200) {
+                console.log(res.data)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    
 
     return (
         <>
@@ -86,6 +100,7 @@ function ListPosts() {
                                 align={'center'}
                                 justify={'center'}>
                                 <Button
+                                    id={post.id}
                                     w={'30%'}
                                     color={'white'}
                                     rounded={'xl'}
@@ -93,7 +108,7 @@ function ListPosts() {
                                     _hover={{
                                         bg: 'green.300',
                                     }}
-                                    onClick={() => { navigate('/post/approve_post/' + post.id) }}
+                                    onClick={handleApprove}
                                 >
                                     Aprobar
                                 </Button>
