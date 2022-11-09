@@ -2,7 +2,7 @@ import { useState } from "react";
 import * as React from "react";
 import Form from "../utilities/Forms";
 import { useNavigate } from "react-router";
-import { login,test } from "../utilities/loaders";
+import { login } from "../utilities/loaders";
 import {
   Button,
   FormControl,
@@ -33,9 +33,6 @@ export default function LoginForm() {
   const toastIdRef = React.useRef();
   const [loading, setLoading] = useState(false);
 
-  // React.useEffect(() => {
-  //   if (localStorage.getItem("isLoggedIn") === "true") navigate("/posts");
-  // }, []);
 
   const handleShowPassword = () => {
     setShow(!show);

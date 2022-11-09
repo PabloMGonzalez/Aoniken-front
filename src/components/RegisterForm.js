@@ -3,8 +3,7 @@ import {
   Box,
   Flex,
   Button,
-  FormControl,
-  Image,
+  FormControl,  
   FormLabel,
   Input,
   InputGroup,
@@ -34,12 +33,11 @@ import Header from './Header.js'
 
 function SignUp() {
 
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen, onOpen } = useDisclosure()
 
   const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const [passConfirmation, setPassConfirmation] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordConfirmation, setShowPasswordConfirmation] = useState(false);

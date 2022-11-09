@@ -10,43 +10,82 @@ import {
   Text,
   useColorModeValue,
   Textarea,
-  Button
+  Button,
+  useToast,
+  useDisclosure,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
 
 } from "@chakra-ui/react";
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import Header from './Header.js';
 import { createPost } from '../utilities/loaders';
 import { useNavigate } from 'react-router-dom';
+
 
 function PostForm() {
 
   const titleColor = useColorModeValue("blue.800", "teal.200");
   const textColor = useColorModeValue("gray.400", "white");
-
   const [title, setTitle] = useState();
   const [content, setContent] = useState();
-  const [user_id, setUserId] = useState();
-
   const navigate = useNavigate();
+  const toast = useToast();
+  const toastIdRef = useRef();
+  const { isOpen, onOpen } = useDisclosure()
+
+
+  const messageError = (message) => {
+    if (!toast.isActive(toastIdRef.current))
+      toastIdRef.current = toast({
+        title: 'Error',
+        position: 'bottom-left',
+        description: message,
+        status: 'error',
+        isClosable: true,
+      })
+  }
+
+  const validateRegister = () => {
+    let isValid = true;
+    console.log(title)
+
+    if (title === undefined) {
+      isValid = false;
+      messageError("El Post debe contener un Titulo");
+      return
+    }
+    if (content === undefined) {
+      isValid = false;
+      messageError("El Post debe tener contenido");
+      return
+    }
+    return isValid;
+  };
 
 
   const sendPost = async () => {
 
-    const formData = {};
-    formData.title = title;
-    formData.content = content;
-    formData.user_id = localStorage.getItem('user_id');
-
-    try {
-      const res = await createPost(formData);
-      if (res.status === 200) {       
-        navigate('/')
+    const validate = validateRegister();
+    if (validate) {
+      const formData = {};
+      formData.title = title;
+      formData.content = content;
+      formData.user_id = localStorage.getItem('user_id');
+      try {
+        const res = await createPost(formData);
+        if (res.status === 200) {
+          onOpen()
+        }
+      } catch (error) {
+        messageError("Se expiro el tiempo de la sesion, o no estas logueado para postear.")
       }
-    } catch (error) {
-      console.log(error)
-    }
-  };
-
+    };
+  }
 
   return (
     <>
@@ -121,8 +160,38 @@ function PostForm() {
                   variant={"solid"}
                   onClick={sendPost}
                 >
-                  Enviar
+                  Crear Post
                 </Button>
+
+                <Modal isOpen={isOpen}>
+                  <ModalOverlay />
+                  <ModalContent>
+                    <ModalHeader>Se creo el post con exito</ModalHeader>
+                    <ModalBody>
+                      <p>El post tiene que ser aprobado por alguno los editores, luego saldra en el inicio de la app</p>
+                    </ModalBody>
+                    <ModalFooter>
+                      <Button
+                        bg='muni.celeste'
+                        fontSize='10px'
+                        color='white'
+                        fontWeight='bold'
+                        w='100%'
+                        h='45'
+                        mb='24px'
+                        onClick={() => navigate("/")}
+                        _hover={{
+                          bg: "teal.200",
+                        }}
+                        _active={{
+                          bg: "teal.400",
+                        }}>
+                        <Text fontWeight={'bold'} fontSize={'13px'}>SIGUIENTE</Text>
+                      </Button>
+                    </ModalFooter>
+                  </ModalContent>
+                </Modal>
+
               </FormControl>
             </Flex>
           </Flex>
