@@ -1,18 +1,21 @@
 import {
-    Table,
-    Thead,
-    Tbody,
-    Tr,
-    Th,
-    Td,
-    TableContainer,
+    Center,
+    useColorModeValue,
+    Stack,
+    List,
+    ListItem,
+    ListIcon,
     Button,
-    Text
+    Text,
+    Box,
+    Divider,
+    HStack
 } from '@chakra-ui/react'
 import Header from './Header.js'
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { listPosts } from '../utilities/loaders.js';
+import { CheckIcon } from '@chakra-ui/icons';
 
 
 function ListPosts() {
@@ -38,53 +41,79 @@ function ListPosts() {
     return (
         <>
             <Header />
-            <TableContainer w="100%"
-                justify={"center"}
-                maxW='1044px'
-                mx='auto'
-            >
-                <Table variant='striped' colorScheme='teal'>
-                    <Thead>
-                        <Tr>
-                            <Th>Id</Th>
-                            <Th>Titulo</Th>
-                            <Th>Contenido</Th>
-                            <Th>Nombre</Th>
-                        </Tr>
-                    </Thead>
-                    <Tbody>
-                        {posts && posts.map((post) => (
-                            <Tr key="post.id">
-                                <Td fontSize="sm"
-                                width={"10px"}
-                                >{post.id}
-                                </Td>
 
-                                  <Td fontSize="sm"
-                                   width={"30px"}
-                                > {post.title}
-                                </Td>
+            {posts && posts.map((post) => (
 
 
-                                <Td fontSize="sm"                                   
-                                > 
-                                
-                                <Text width={"10px"}>
-                                {post.content}
-                                </Text>
+                <Text>{post.title}</Text>
 
+            ))}
 
+            <Center py={6}>
+                <Box
+                    maxW={'330px'}
+                    w={'full'}
+                    bg={useColorModeValue('white', 'gray.800')}
+                    boxShadow={'2xl'}
+                    rounded={'md'}
+                    overflow={'hidden'}>
+                    <Stack
+                        textAlign={'center'}
+                        p={6}
+                        color={useColorModeValue('gray.800', 'white')}
+                        align={'center'}>
+                        <Text
+                            fontSize={'2xl'}
+                            fontWeight={500}
+                            p={2}
+                            px={3}
+                        >
+                            TITULO
+                        </Text>
+                        <Divider />
+                        <Stack direction={'row'} align={'center'} justify={'center'}>
+                            <Text fontSize={'md'}pt={2} >
+                                HOLA HOLA HOLA
+                            </Text>
+                        </Stack>
+                    </Stack>
 
-                                </Td>
-                                <Td fontSize="sm"
-                                >{post.nombre}
-                                </Td>
-                            </Tr>
+                    <Box bg={useColorModeValue('gray.50', 'gray.900')} px={6} py={10}>
+                        <HStack>
+                            <Button
+                                w={'full'}
+                                bg={'green.400'}
+                                color={'white'}
+                                rounded={'xl'}
+                                boxShadow={'0 5px 20px 0px rgb(72 187 120 / 43%)'}
+                                _hover={{
+                                    bg: 'green.500',
+                                }}
+                                _focus={{
+                                    bg: 'green.500',
+                                }}>
+                                Aprobar
+                            </Button>
+                            <Button
+                                w={'full'}
+                                bg={'green.400'}
+                                color={'white'}
+                                rounded={'xl'}
+                                boxShadow={'0 5px 20px 0px rgb(72 187 120 / 43%)'}
+                                _hover={{
+                                    bg: 'green.500',
+                                }}
+                                _focus={{
+                                    bg: 'green.500',
+                                }}>
+                                Rechazar
+                            </Button>
+                        </HStack>
 
-                        ))}
-                    </Tbody>
-                </Table>
-            </TableContainer>
+                    </Box>
+                </Box>
+            </Center>
+
         </>
     );
 }
