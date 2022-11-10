@@ -40,6 +40,7 @@ export const login = async (data) => {
     localStorage.setItem("lgac", response.data.result);
     localStorage.setItem("lgrf", response.data.result);
     localStorage.setItem("user_id", response.data.id);
+    localStorage.setItem("role", response.data.role);
     return response;
   } catch (error) {
     console.log(error);

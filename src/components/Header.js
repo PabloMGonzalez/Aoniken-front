@@ -23,6 +23,7 @@ export default function Header() {
   }
 
   const [isLoggedIn, setIsLoggIn] = useLocalStorage('isLoggedIn');
+  const [role, setRole]=useLocalStorage('role');
 
   return (
 
@@ -44,59 +45,64 @@ export default function Header() {
           direction={'reverse-row'}
           spacing={6}>
 
-          <Button
-            display={{ base: 'none', md: 'inline-flex' }}
-            fontSize={'sm'}
-            fontWeight={600}
-            color={'white'}
-            bg={'blue.400'}
-            _hover={{
-              bg: 'green.300',
-            }}
-            onClick={() => { navigate('/home') }}>
-            Home
-          </Button>
+          <Stack
+            ml={'auto'}
+            direction={'row'}
+            spacing={6}>
 
-          {isLoggedIn && <Button
-            display={{ base: 'none', md: 'inline-flex' }}
-            fontSize={'sm'}
-            mx="25px"
-            fontWeight={600}
-            color={'white'}
-            bg={'blue.400'}
-            _hover={{
-              bg: 'green.300',
-            }}
-            onClick={() => { navigate('/create_post') }}>
-            Nuevo Posteo
-          </Button>}
+            isLoggedIn && <Button
+              display={{ base: 'none', md: 'inline-flex' }}
+              fontSize={'sm'}
+              fontWeight={600}
+              color={'white'}
+              bg={'blue.400'}
+              _hover={{
+                bg: 'green.300',
+              }}
+              onClick={() => { navigate('/home') }}>
+              Home
+            </Button>
 
-          {isLoggedIn && <Button
-            display={{ base: 'none', md: 'inline-flex' }}
-            fontSize={'sm'}
-            fontWeight={600}
-            color={'white'}
-            bg={'blue.400'}
-            _hover={{
-              bg: 'green.300',
-            }}
-            onClick={() => navigate('/listar_posts')}>
-            Listar Posteos
-          </Button>}
+            {isLoggedIn && <Button
+              display={{ base: 'none', md: 'inline-flex' }}
+              fontSize={'sm'}
+              fontWeight={600}
+              color={'white'}
+              bg={'blue.400'}
+              _hover={{
+                bg: 'green.300',
+              }}
+              onClick={() => { navigate('/create_post') }}>
+              Nuevo Post
+            </Button>}
 
-          {isLoggedIn && <Button
-            display={{ base: 'none', md: 'inline-flex' }}
-            fontSize={'sm'}
-            fontWeight={600}
-            color={'white'}
-            bg={'red.400'}
-            ml={"25px"}
-            _hover={{
-              bg: 'green.300',
-            }}
-            onClick={() => navigate('/listar_posts_editables')}>
-            Edit
-          </Button>}
+
+            {isLoggedIn && role == 1 &&<Button
+              display={{ base: 'none', md: 'inline-flex' }}
+              fontSize={'sm'}
+              fontWeight={600}
+              color={'white'}
+              bg={'blue.400'}
+              _hover={{
+                bg: 'green.300',
+              }}
+              onClick={() => navigate('/listar_posts')}>
+              Listar Posts
+            </Button>}
+
+            {isLoggedIn && role == 2 && <Button
+              display={{ base: 'none', md: 'inline-flex' }}
+              fontSize={'sm'}
+              fontWeight={600}
+              color={'white'}
+              bg={'red.400'}
+              _hover={{
+                bg: 'green.300',
+              }}
+              onClick={() => navigate('/listar_posts_editables')}>
+              Editar Posts
+            </Button>}
+          </Stack>
 
 
         </Stack>
