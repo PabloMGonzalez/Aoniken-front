@@ -10,17 +10,17 @@ import {
 import Header from './Header.js'
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { approvePost, listPosts, rejectPost } from '../utilities/loaders.js';
+import { approvePost, listPendingApprovalPosts, rejectPost } from '../utilities/loaders.js';
 
 
 
 function ListPosts() {
 
-    const [posts, setPosts] = useState();
+    const [posts, setPosts] = useState([]);
 
     const selectPosts = async () => {
         try {
-            const res = await listPosts();
+            const res = await listPendingApprovalPosts();
             if (res.status === 200) {
                 setPosts(res.data)
             }
@@ -32,22 +32,20 @@ function ListPosts() {
         selectPosts()
     }, []);
 
-    const handleApprove = async (e) => {
+    const handleApprove = async (e, key) => {
         try {
             const formData = {}
             formData.id = e.target.id
-            const res = await approvePost(formData);
-          
-                const removePost= posts.filter((_, i) => i !== e.target.id);
-                setPosts(removePost);
-            console.log(posts);
-
+            const res = await approvePost(formData);           
         } catch (error) {
             console.log(error)
         }
+        posts.splice(key, 1);
+        setPosts([...posts]);
     }
 
-    const handleReject = async (e) => {
+    const handleReject = async (e, key) => {
+
         try {
             const formData = {}
             formData.id = e.target.id
@@ -55,15 +53,17 @@ function ListPosts() {
         } catch (error) {
             console.log(error)
         }
-    }
 
+        posts.splice(key, 1);
+        setPosts([...posts]);
+
+    }
 
     return (
         <>
-
             <Header />
-            {posts && posts.map((post) => (
-                
+            {posts && posts.map((post, key) => (
+
                 <Center py={6}>
                     <Box
                         maxW={'660px'}

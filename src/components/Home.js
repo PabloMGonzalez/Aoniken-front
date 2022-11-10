@@ -13,7 +13,7 @@ import {
 import Header from './Header.js'
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { createComment, listPosts } from '../utilities/loaders.js';
+import { createComment, listApprovedPosts } from '../utilities/loaders.js';
 
 
 function Home() {
@@ -23,7 +23,7 @@ function Home() {
 
     const selectPosts = async () => {
         try {
-            const res = await listPosts();
+            const res = await listApprovedPosts();
             if (res.status === 200) {
                 setPosts(res.data)
             }

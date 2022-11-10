@@ -5,10 +5,13 @@ import {
   loginURL,
   registerUserURL,
   testURL,
-  listPostsURL,
+  listApprovedPostURL,
   approvePostURL,
   rejectPostURL,
-  createCommentURL
+  createCommentURL,
+  editPostURL,
+  listPostPendingApprovalURL,
+  listUnapprovedPostURL
 } from "./urls";
 
 export const test = async () => {
@@ -63,9 +66,29 @@ export const createPost = async (data) => {
   }
 }
 
-export const listPosts = async () => {
+export const editPost = async (data) => {
   try {
-    const response = await axiosLoggedInConfig().get(listPostsURL);
+    const response = await axiosLoggedInConfig().post(editPostURL, data);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+
+export const listApprovedPosts = async () => {
+  try {
+    const response = await axiosLoggedInConfig().get(listApprovedPostURL);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+
+export const listUnapprovedPosts = async () => {
+  try {
+    const response = await axiosLoggedInConfig().get(listUnapprovedPostURL);
     return response;
   } catch (error) {
     console.log(error);
@@ -80,6 +103,18 @@ export const approvePost = async (data) => {
     console.log(error);
   }
 }
+
+
+export const listPendingApprovalPosts = async () => {
+  try {
+    const response = await axiosLoggedInConfig().get(listPostPendingApprovalURL)
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+
 
 export const rejectPost = async (data) => {
   try {
