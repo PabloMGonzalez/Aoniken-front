@@ -5,7 +5,8 @@ import RegisterForm from './components/RegisterForm';
 import PostForm from './components/PostForm.js';
 import Home from './components/Home';
 import ListPosts from './components/ListPosts';
-import EditForm from './components/EditForm';
+// import EditForm from './components/EditForm';
+import ListEditable from './components/ListEditable';
 
 
 
@@ -25,7 +26,7 @@ function App() {
         <Route element={<Home />} path="/home" />
         <Route element={<PostForm />} path="/create_post" />
         <Route element={<ListPosts />} path="listar_posts" />
-        <Route element={<EditForm />} path="editar_post" />
+        <Route element={<ListEditable />} path="listar_posts_editables" />
 
 
 

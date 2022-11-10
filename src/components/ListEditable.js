@@ -6,7 +6,6 @@ import {
     Text,
     Box,
     Divider,
-    HStack,
     useDisclosure,
     useColorModeValue,
     useToast
@@ -18,8 +17,7 @@ import { useNavigate } from 'react-router-dom';
 import { editPost, listUnapprovedPosts } from '../utilities/loaders.js';
 
 
-const EditForm = () => {
-    const textColor = useColorModeValue("gray.400", "white");
+const ListEditable = () => {
     const [title, setTitle] = useState();
     const [content, setContent] = useState();
     const navigate = useNavigate();
@@ -44,59 +42,13 @@ const EditForm = () => {
     }, []);
 
 
-    const messageError = (message) => {
-        if (!toast.isActive(toastIdRef.current))
-            toastIdRef.current = toast({
-                title: 'Error',
-                position: 'bottom-left',
-                description: message,
-                status: 'error',
-                isClosable: true,
-            })
-    }
-    const validateRegister = () => {
-        let isValid = true;
-        console.log(title)
-
-        if (title === undefined) {
-            isValid = false;
-            messageError("El Post debe contener un Titulo");
-            return
-        }
-        if (content === undefined) {
-            isValid = false;
-            messageError("El Post debe tener contenido");
-            return
-        }
-        return isValid;
-    };
-
-
-    const sendPost = async () => {
-
-        const validate = validateRegister();
-        if (validate) {
-            const formData = {};
-            formData.title = title;
-            formData.content = content;
-            formData.user_id = localStorage.getItem('user_id');
-            try {
-                const res = await editPost(formData);
-                if (res.status === 200) {
-                    onOpen()
-                }
-            } catch (error) {
-                messageError("Se expiro el tiempo de la sesion, o no estas logueado para postear.")
-            }
-        };
-    }
 
     return (
         <>
             <Header />
-            {posts && posts.map((post) => (
-
-                <Center py={6}>
+            {posts && posts.map((post, key) => (
+                <Center py={6}
+                    key={post.id}>
                     <Box
                         maxW={'660px'}
                         w={'full'}
@@ -129,7 +81,6 @@ const EditForm = () => {
                             align={'right'}
                             mr={"10px"}
                             mb={"10px"}>
-                            Autor:{post.nombre}
                         </Text>
                         <Box bg={'blue.50'}
                             borderTop={1}
@@ -138,7 +89,7 @@ const EditForm = () => {
                             align={'center'}
                             justify={"center"}
                             py={10}>
-                            <Button        
+                            <Button
                                 id={post.id}
                                 w={'30%'}
                                 color={'white'}
@@ -158,4 +109,4 @@ const EditForm = () => {
     );
 };
 
-export default EditForm;
+export default ListEditable;

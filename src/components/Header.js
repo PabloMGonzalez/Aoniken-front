@@ -94,7 +94,7 @@ export default function Header() {
             _hover={{
               bg: 'green.300',
             }}
-            onClick={() => navigate('/editar_post')}>
+            onClick={() => navigate('/listar_posts_editables')}>
             Edit
           </Button>}
 

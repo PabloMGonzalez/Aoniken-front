@@ -56,7 +56,8 @@ function Home() {
         <>
             <Header />
             {posts && posts.map((post) => (
-                <Center py={6}>
+                <Center py={6}
+                key = {post.id}>
                     <Box
                         maxW={'660px'}
                         w={'full'}
