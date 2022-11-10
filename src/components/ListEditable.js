@@ -18,12 +18,7 @@ import { editPost, listUnapprovedPosts } from '../utilities/loaders.js';
 
 
 const ListEditable = () => {
-    const [title, setTitle] = useState();
-    const [content, setContent] = useState();
     const navigate = useNavigate();
-    const toast = useToast();
-    const toastIdRef = useRef();
-    const { isOpen, onOpen } = useDisclosure()
     const [posts, setPosts] = useState();
 
     const selectPosts = async () => {
@@ -36,17 +31,14 @@ const ListEditable = () => {
             console.log(error)
         }
     };
-
     useEffect(() => {
         selectPosts()
     }, []);
 
-
-
     return (
         <>
             <Header />
-            {posts && posts.map((post, key) => (
+            {posts && posts.map((post   ) => (
                 <Center py={6}
                     key={post.id}>
                     <Box
@@ -98,7 +90,7 @@ const ListEditable = () => {
                                 _hover={{
                                     bg: 'green.300',
                                 }}
-                            >
+                                onClick={() => navigate('/edit_post', {state:{post_id:post.id}})}>                            
                                 Editar
                             </Button>
                         </Box>

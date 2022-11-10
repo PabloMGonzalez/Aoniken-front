@@ -17,6 +17,7 @@ export const editPostURL = BASE_URL.concat("post/edit_post");
 export const listApprovedPostURL = BASE_URL.concat("post/list_approved_posts");
 export const listPostPendingApprovalURL = BASE_URL.concat("post/list_pending_approval_posts");
 export const listUnapprovedPostURL = BASE_URL.concat("post/list_unapproved_posts");
+export const selectPostURL = BASE_URL.concat("post/select_post")
 
 
 

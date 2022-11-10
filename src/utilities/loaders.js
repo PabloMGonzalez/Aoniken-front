@@ -11,7 +11,8 @@ import {
   createCommentURL,
   editPostURL,
   listPostPendingApprovalURL,
-  listUnapprovedPostURL
+  listUnapprovedPostURL,
+  selectPostURL
 } from "./urls";
 
 export const test = async () => {
@@ -119,6 +120,16 @@ export const listPendingApprovalPosts = async () => {
 export const rejectPost = async (data) => {
   try {
     const response = await axiosLoggedInConfig().post(rejectPostURL, data)
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+
+export const selectPost = async (data) => {
+  try {
+    const response = await axiosLoggedInConfig().post(selectPostURL, data)
     return response;
   } catch (error) {
     console.log(error);

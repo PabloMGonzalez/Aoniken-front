@@ -62,8 +62,7 @@ function ListPosts() {
     return (
         <>
             <Header />
-            {posts && posts.map((post, key) => (
-
+            {posts && posts.map((post) => (
                 <Center py={6} key = {post.id}>
                     <Box
                         maxW={'660px'}

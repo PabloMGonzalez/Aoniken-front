@@ -63,7 +63,7 @@ function SignUp() {
 
   const sendUserToAPI = async () => {
 
-    const validate = validateRegister();
+    const validate = validate();
 
     if (validate) {
 
@@ -85,7 +85,7 @@ function SignUp() {
 
   };
 
-  const validateRegister = () => {
+  const validate = () => {
     let isValid = true;
 
     if (nombre === "" || nombre.length < 3 || nombre.length > 50) {
