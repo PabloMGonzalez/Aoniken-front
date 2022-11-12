@@ -8,18 +8,26 @@ import {
     FormControl,
     FormLabel,
     Textarea,
-
+    Accordion,
+    AccordionItem,
+    AccordionButton,
+    AccordionPanel,
+    AccordionIcon,
+    Badge,
+    position
 } from '@chakra-ui/react'
 import Header from './Header.js'
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { createComment, listApprovedPosts } from '../utilities/loaders.js';
+import { createComment, getComments, listApprovedPosts } from '../utilities/loaders.js';
 
 
 function Home() {
 
     const [content, setContent] = useState("");
     const [posts, setPosts] = useState();
+    const [comments, setComments] = useState();
+    const [showResults, setShowResults] = useState(false)
 
     const selectPosts = async () => {
         try {
@@ -31,6 +39,28 @@ function Home() {
             console.log(error)
         }
     };
+
+
+    const selectComments = async (e) => {
+        console.log('hola entre al seleccionador de comentarios')
+
+        const formData = {}
+        formData.id = e.target.id;
+        console.log(formData)
+        try {
+            const res = await getComments(formData);
+            if (res.status === 200) {
+                console.log(res.data)
+                setComments(res.data)
+                setShowResults(true)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+       
+    };
+
+
     useEffect(() => {
         selectPosts()
     }, []);
@@ -40,14 +70,13 @@ function Home() {
 
         const formData = {}
         formData.user_id = localStorage.getItem("user_id");
-        formData.post_id= e.target.id;
+        formData.post_id = e.target.id;
         formData.content = content;
         console.log(formData)
         const response = await createComment(formData)
         if (response.status === 200) {
             console.log(response)
         }
-
     }
 
 
@@ -56,8 +85,8 @@ function Home() {
         <>
             <Header />
             {posts && posts.map((post) => (
-                <Center py={6}
-                key = {post.id}>
+                <Center py={6} >
+
                     <Box
                         maxW={'660px'}
                         w={'full'}
@@ -92,6 +121,31 @@ function Home() {
                             mb={"10px"}>
                             Autor:{post.nombre}
                         </Text>
+
+                        <Accordion >
+                            <AccordionItem>
+                                <AccordionButton>
+                                    <Box flex='1' textAlign='left'
+                                        onClick={selectComments}
+                                        id={post.id}>
+                                        Ver los comentarios
+                                    </Box>
+                                    <AccordionIcon />
+                                </AccordionButton>
+                                {comments && showResults && comments.map((comment) => (     
+                                    <Box ml='3'>
+                                        <Text fontWeight='bold'>
+                                            <Badge ml='1' colorScheme='green'>
+                                            {comment.nombre}
+                                            </Badge>
+                                        </Text>
+                                        <Text fontSize='sm'> {comment.content}</Text>
+                                    </Box>
+                                    
+                                ))}
+                            </AccordionItem>
+                        </Accordion>
+
                         <Box bg={'gray.200'}
                             borderTop={1}
                             borderStyle={'solid'}

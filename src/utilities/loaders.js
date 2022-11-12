@@ -12,7 +12,8 @@ import {
   editPostURL,
   listPostPendingApprovalURL,
   listUnapprovedPostURL,
-  selectPostURL
+  selectPostURL,
+  listCommentsURL
 } from "./urls";
 
 export const test = async () => {
@@ -140,6 +141,15 @@ export const selectPost = async (data) => {
 export const createComment = async (data) => {
   try {
     const response = await axiosLoggedInConfig().post(createCommentURL, data)
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const getComments = async (data) => {
+  try {
+    const response = await axiosLoggedInConfig().post(listCommentsURL,data)
     return response;
   } catch (error) {
     console.log(error);
