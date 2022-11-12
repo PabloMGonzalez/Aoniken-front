@@ -91,15 +91,16 @@ export default function LoginForm() {
     try {
       const res = await login(formData);
       setLoading(false);
-      if (res.status === 200) {
+      if (res.data.success) {
         console.log("Estado del logueo: " + localStorage.getItem("isLoggedIn"));
         navigate('/')
       }
 
     } catch (error) {
+      console.log(error)
       toastIdRef.current = toast({
         position: 'bottom-left',
-        description: 'DNI o contraseña incorrectos.',
+        description: 'email o contraseña incorrectos.',
         status: 'error',
         isClosable: true,
       })

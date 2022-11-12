@@ -122,7 +122,7 @@ function Home() {
                             Autor:{post.nombre}
                         </Text>
 
-                        <Accordion >
+                        <Accordion allowMultiple>
                             <AccordionItem>
                                 <AccordionButton>
                                     <Box flex='1' textAlign='left'

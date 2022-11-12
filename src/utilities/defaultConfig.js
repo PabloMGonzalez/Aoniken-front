@@ -23,34 +23,6 @@ export const axiosLoggedInConfig = () => {
     (err) => Promise.reject(err)
   );
 
-  const refreshAuthLogic = async (failedRequest) => {
-    const refreshToken = localStorage.getItem('lgac');
-    if (refreshToken !== null) {
-      return axios
-        .post(
-          'refreshtoken/',
-          {
-            refresh: refreshToken
-          },
-          {
-            baseURL: BASE_URL
-          }
-        )
-        .then((resp) => {
-          const { access } = resp.data;
-          failedRequest.response.config.headers.Authorization = `Bearer ${access}`;
-          localStorage.setItem('lgac', access);
-        })
-        .catch((err) => {
-          if (err.response && err.response.status === 400) {
-            localStorage.setItem('lgac', 'null');
-            localStorage.setItem('lgrf', 'null');
-          }
-        });
-    }
-  };
-
-  createAuthRefreshInterceptor(axiosService, refreshAuthLogic);
 
   return axiosService;
 };
