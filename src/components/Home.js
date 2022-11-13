@@ -7,14 +7,8 @@ import {
     Divider,
     FormControl,
     FormLabel,
-    Textarea,
-    Accordion,
-    AccordionItem,
-    AccordionButton,
-    AccordionPanel,
-    AccordionIcon,
+    Textarea,   
     Badge,
-    position
 } from '@chakra-ui/react'
 import Header from './Header.js'
 import React, { useEffect } from 'react';
