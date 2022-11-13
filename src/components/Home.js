@@ -48,25 +48,22 @@ function Home() {
     }, []);
 
 
-    const handleComment = async (e, key) => {
+    const handleComment = async (e) => {
 
         const formData = {}
         formData.user_id = localStorage.getItem("user_id");
         formData.post_id = e.target.id;
         formData.content = content;       
-        console.log(formData)
-        const response = await createComment(formData)
-     
+        const response = await createComment(formData)    
 
         const updatedPostsComments = postsComments.map(post => {
             if (post.id == formData.post_id) {            
-              post.comments = [...post.comments, {content: content, nombre: 'pepe'}];    
+              post.comments = [...post.comments, {content: content, nombre: localStorage.getItem("nombre")}];    
           
           }
           return post;
           });
           setPostsComments(updatedPostsComments);     
-
       
     }
 
@@ -113,7 +110,7 @@ function Home() {
                         </Text>
                         <Divider />
 
-                        {post.comments.map((comment,i) => (<Box ml='3' key={`${comment.id}+${i}`}>
+                        {post.comments.reverse().map((comment,i) => (<Box ml='3' key={`${comment.id}+${i}`}>
                             <Text >
                                 <Badge
                                     rounded={"lg"}
