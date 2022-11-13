@@ -110,7 +110,7 @@ function Home() {
                         </Text>
                         <Divider />
 
-                        {post.comments.reverse().map((comment,i) => (<Box ml='3' key={`${comment.id}+${i}`}>
+                        {post.comments.map((comment,i) => (<Box ml='3' key={`${comment.id}+${i}`}>
                             <Text >
                                 <Badge
                                     rounded={"lg"}
