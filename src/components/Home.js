@@ -20,7 +20,7 @@ import Header from './Header.js'
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { createComment, getComments, listApprovedPosts } from '../utilities/loaders.js';
-
+import { useLocalStorage } from 'react-use';
 
 function Home() {
 
@@ -28,6 +28,8 @@ function Home() {
     const [posts, setPosts] = useState();
     const [comments, setComments] = useState();
     const [showResults, setShowResults] = useState(false)
+    const [isLoggedIn, setIsLoggIn] = useLocalStorage('isLoggedIn');
+
 
     const selectPosts = async () => {
         try {
@@ -57,7 +59,7 @@ function Home() {
         } catch (error) {
             console.log(error)
         }
-       
+
     };
 
 
@@ -84,7 +86,7 @@ function Home() {
     return (
         <>
             <Header />
-            {posts && posts.reverse().map((post) => (
+            {posts && posts.map((post) => (
                 <Center py={6} >
 
                     <Box
@@ -122,6 +124,9 @@ function Home() {
                             Autor:{post.nombre}
                         </Text>
 
+
+
+
                         <Accordion allowMultiple>
                             <AccordionItem >
                                 <AccordionButton>
@@ -132,31 +137,34 @@ function Home() {
                                     </Box>
                                     <AccordionIcon />
                                 </AccordionButton>
-                                {comments && showResults && comments.reverse().map((comment) => (     
+                                {comments && showResults && comments.map((comment) => (
                                     <Box ml='3'>
                                         <Text >
-                                            <Badge 
-                                            rounded={"lg"}
-                                            fontSize={"sm"}
-                                            py={1}
-                                           px={4}
-                                           my={2}
-                                            colorScheme='green'>
-                                            {comment.nombre}
+                                            <Badge
+                                                rounded={"lg"}
+                                                fontSize={"sm"}
+                                                py={1}
+                                                px={4}
+                                                my={2}
+                                                colorScheme='green'>
+                                                {comment.nombre}
                                             </Badge>
                                         </Text>
-                                        <Text 
-                                        fontWeight='bold'
-                                         fontSize='xl'
-                                         mb={3}> {comment.content}
-                                         </Text>
+                                        <Text
+
+                                            fontSize='lg'
+                                            mb={3}> {comment.content}
+                                        </Text>
                                     </Box>
-                                    
+
                                 ))}
                             </AccordionItem >
                         </Accordion>
 
-                        <Box bg={'gray.200'}
+
+
+
+                        {isLoggedIn && <Box bg={'gray.200'}
                             borderTop={1}
                             borderStyle={'solid'}
                             px={6}
@@ -175,8 +183,7 @@ function Home() {
                                     Enviar comentario
                                 </Button>
                             </FormControl>
-
-                        </Box>
+                        </Box>}
                     </Box>
                 </Center>
             ))}

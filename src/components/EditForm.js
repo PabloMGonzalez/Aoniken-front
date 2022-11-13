@@ -111,7 +111,7 @@ function EditForm() {
   return (
     <>
       <Header />
-      {post && post.reverse().map((selectedPost) => (
+      {post && post.map((selectedPost) => (
         <Flex
         key={selectedPost.id}
           align={"center"}

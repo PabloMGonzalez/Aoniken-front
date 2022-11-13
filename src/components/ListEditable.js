@@ -38,7 +38,7 @@ const ListEditable = () => {
     return (
         <>
             <Header />
-            {posts && posts.map((post   ) => (
+            {posts && posts.map((post) => (
                 <Center py={6}
                     key={post.id}>
                     <Box
@@ -90,7 +90,7 @@ const ListEditable = () => {
                                 _hover={{
                                     bg: 'green.300',
                                 }}
-                                onClick={() => navigate('/edit_post', {state:{post_id:post.id}})}>                            
+                                onClick={() => navigate('/edit_post', { state: { post_id: post.id } })}>
                                 Editar
                             </Button>
                         </Box>

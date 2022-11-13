@@ -63,7 +63,7 @@ export default function Header() {
               Home
             </Button>
 
-            {isLoggedIn && <Button
+            {isLoggedIn  && role == 2 && <Button
               display={{ base: 'none', md: 'inline-flex' }}
               fontSize={'sm'}
               fontWeight={600}

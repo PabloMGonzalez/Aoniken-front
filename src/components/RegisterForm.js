@@ -63,9 +63,9 @@ function SignUp() {
 
   const sendUserToAPI = async () => {
 
-    const validate = validate();
+    const validateForm = validate();
 
-    if (validate) {
+    if (validateForm) {
 
       const formData = {};
       formData.nombre = nombre;
