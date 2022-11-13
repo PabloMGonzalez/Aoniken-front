@@ -41,7 +41,6 @@ function Home() {
                     comments: comments.data.filter(comment => comment.id === post.id)
                 }
             })
-
             setPostsComments(result)
             console.log(result)
         } catch (error) {
@@ -122,12 +121,12 @@ function Home() {
                                     px={4}
                                     my={2}
                                     colorScheme='green'>
-                                    {comment?.content}
+                                    {comment.nombre}
                                 </Badge>
                             </Text>
 
                             <Text
-                                fontSize='lg'
+                                fontSize='md'
                                 mb={3}>
                                 {comment.content}
                             </Text>
