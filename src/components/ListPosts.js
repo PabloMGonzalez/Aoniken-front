@@ -10,9 +10,7 @@ import {
 import Header from './Header.js'
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { approvePost, listPendingApprovalPosts, rejectPost } from '../utilities/loaders.js';
-
-
+import { approvePost, listPendingApprovalPosts, rejectPost, deletePost } from '../utilities/loaders.js';
 
 function ListPosts() {
 
@@ -45,7 +43,6 @@ function ListPosts() {
     }
 
     const handleReject = async (e, key) => {
-
         try {
             const formData = {}
             formData.id = e.target.id
@@ -53,10 +50,20 @@ function ListPosts() {
         } catch (error) {
             console.log(error)
         }
-
         posts.splice(key, 1);
         setPosts([...posts]);
+    }
 
+    const handleDelete = async (e, key) => {
+        try {
+            const formData = {}
+            formData.id = e.target.id
+            const res = await deletePost(formData);
+        } catch (error) {
+            console.log(error)
+        }
+        posts.splice(key, 1);
+        setPosts([...posts]);
     }
 
     return (
@@ -90,7 +97,6 @@ function ListPosts() {
                                 </Text>
                             </Stack>
                         </Stack>
-
                         <Text
                             fontSize={'sm'}
                             align={'right'}
@@ -111,7 +117,7 @@ function ListPosts() {
                                     w={'30%'}
                                     color={'white'}
                                     rounded={'xl'}
-                                    bg={'blue.400'}
+                                    bg={'green.400'}
                                     _hover={{
                                         bg: 'green.300',
                                     }}
@@ -131,6 +137,19 @@ function ListPosts() {
                                     onClick={handleReject}
                                 >
                                     Rechazar
+                                </Button>
+                                <Button
+                                    id={post.id}
+                                    w={'30%'}
+                                    color={'white'}
+                                    rounded={'xl'}
+                                    bg={'red.400'}
+                                    _hover={{
+                                        bg: 'green.300',
+                                    }}
+                                    onClick={handleDelete}
+                                >
+                                    Borrar
                                 </Button>
                             </HStack>
                         </Box>

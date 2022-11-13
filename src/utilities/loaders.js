@@ -13,7 +13,8 @@ import {
   listPostPendingApprovalURL,
   listUnapprovedPostURL,
   selectPostURL,
-  listCommentsURL
+  listCommentsURL,
+  deletePostURL
 } from "./urls";
 
 export const test = async () => {
@@ -59,10 +60,18 @@ export const logout = async () => {
   }
 }
 
-
 export const createPost = async (data) => {
   try {
     const response = await axiosLoggedInConfig().post(createPostURL, data);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const deletePost = async (data) => {
+  try {
+    const response = await axiosLoggedInConfig().post(deletePostURL, data);
     return response;
   } catch (error) {
     console.log(error);
@@ -78,7 +87,6 @@ export const editPost = async (data) => {
   }
 }
 
-
 export const listApprovedPosts = async () => {
   try {
     const response = await axiosLoggedInConfig().get(listApprovedPostURL);
@@ -87,7 +95,6 @@ export const listApprovedPosts = async () => {
     console.log(error);
   }
 }
-
 
 export const listUnapprovedPosts = async () => {
   try {
@@ -107,7 +114,6 @@ export const approvePost = async (data) => {
   }
 }
 
-
 export const listPendingApprovalPosts = async () => {
   try {
     const response = await axiosLoggedInConfig().get(listPostPendingApprovalURL)
@@ -117,8 +123,6 @@ export const listPendingApprovalPosts = async () => {
   }
 }
 
-
-
 export const rejectPost = async (data) => {
   try {
     const response = await axiosLoggedInConfig().post(rejectPostURL, data)
@@ -127,7 +131,6 @@ export const rejectPost = async (data) => {
     console.log(error);
   }
 }
-
 
 export const selectPost = async (data) => {
   try {
