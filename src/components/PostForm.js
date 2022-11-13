@@ -50,7 +50,7 @@ function PostForm() {
       })
   }
 
-  const validate = () => {
+  const validateForm = () => {
     let isValid = true;
     console.log(title)
 
@@ -70,7 +70,7 @@ function PostForm() {
 
   const sendPost = async () => {
 
-    const validate = validate();
+    const validate = validateForm();
     if (validate) {
       const formData = {};
       formData.title = title;

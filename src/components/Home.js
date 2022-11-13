@@ -84,7 +84,7 @@ function Home() {
     return (
         <>
             <Header />
-            {posts && posts.map((post) => (
+            {posts && posts.reverse().map((post) => (
                 <Center py={6} >
 
                     <Box
@@ -132,7 +132,7 @@ function Home() {
                                     </Box>
                                     <AccordionIcon />
                                 </AccordionButton>
-                                {comments && showResults && comments.map((comment) => (     
+                                {comments && showResults && comments.reverse().map((comment) => (     
                                     <Box ml='3'>
                                         <Text fontWeight='bold'>
                                             <Badge ml='1' colorScheme='green'>
