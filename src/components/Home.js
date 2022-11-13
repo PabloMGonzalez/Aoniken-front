@@ -25,46 +25,33 @@ import { useLocalStorage } from 'react-use';
 function Home() {
 
     const [content, setContent] = useState("");
-    const [posts, setPosts] = useState();
-    const [comments, setComments] = useState();
-    const [showResults, setShowResults] = useState(false)
+    const [postsComments, setPostsComments] = useState();
     const [isLoggedIn, setIsLoggIn] = useLocalStorage('isLoggedIn');
 
 
-    const selectPosts = async () => {
+    const selectPostsComments = async () => {
+
         try {
-            const res = await listApprovedPosts();
-            if (res.status === 200) {
-                setPosts(res.data)
-            }
+            const posts = await listApprovedPosts();
+            const comments = await getComments();
+
+            const result = posts.data.map(post => {
+                return {
+                    ...post,
+                    comments: comments.data.filter(comment => comment.id === post.id)
+                }
+            })
+
+            setPostsComments(result)
+            console.log(result)
         } catch (error) {
             console.log(error)
         }
-    };
-
-
-    const selectComments = async (e) => {
-        console.log('hola entre al seleccionador de comentarios')
-
-        const formData = {}
-        formData.id = e.target.id;
-        console.log(formData)
-        try {
-            const res = await getComments(formData);
-            if (res.status === 200) {
-                console.log(res.data)
-                setComments(res.data)
-                setShowResults(true)
-            }
-        } catch (error) {
-            console.log(error)
-        }
-
     };
 
 
     useEffect(() => {
-        selectPosts()
+        selectPostsComments()
     }, []);
 
 
@@ -82,11 +69,12 @@ function Home() {
     }
 
 
-
     return (
         <>
             <Header />
-            {posts && posts.map((post) => (
+
+
+            {postsComments && postsComments.map((post) => (
                 <Center py={6} >
 
                     <Box
@@ -123,45 +111,28 @@ function Home() {
                             mb={"10px"}>
                             Autor:{post.nombre}
                         </Text>
+                        <Divider />
 
+                        {post.comments.map((comment) => (<Box ml='3'>
+                            <Text >
+                                <Badge
+                                    rounded={"lg"}
+                                    fontSize={"sm"}
+                                    py={1}
+                                    px={4}
+                                    my={2}
+                                    colorScheme='green'>
+                                    {comment?.content}
+                                </Badge>
+                            </Text>
 
-
-
-                        <Accordion allowMultiple>
-                            <AccordionItem >
-                                <AccordionButton>
-                                    <Box flex='1' textAlign='left'
-                                        onClick={selectComments}
-                                        id={post.id}>
-                                        Ver los comentarios
-                                    </Box>
-                                    <AccordionIcon />
-                                </AccordionButton>
-                                {comments && showResults && comments.map((comment) => (
-                                    <Box ml='3'>
-                                        <Text >
-                                            <Badge
-                                                rounded={"lg"}
-                                                fontSize={"sm"}
-                                                py={1}
-                                                px={4}
-                                                my={2}
-                                                colorScheme='green'>
-                                                {comment.nombre}
-                                            </Badge>
-                                        </Text>
-                                        <Text
-
-                                            fontSize='lg'
-                                            mb={3}> {comment.content}
-                                        </Text>
-                                    </Box>
-
-                                ))}
-                            </AccordionItem >
-                        </Accordion>
-
-
+                            <Text
+                                fontSize='lg'
+                                mb={3}>
+                                {comment.content}
+                            </Text>
+                            <Divider />
+                        </Box>))}
 
 
                         {isLoggedIn && <Box bg={'gray.200'}

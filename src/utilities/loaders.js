@@ -150,9 +150,9 @@ export const createComment = async (data) => {
   }
 }
 
-export const getComments = async (data) => {
+export const getComments = async () => {
   try {
-    const response = await axiosLoggedInConfig().post(listCommentsURL,data)
+    const response = await axiosLoggedInConfig().get(listCommentsURL)
     return response;
   } catch (error) {
     console.log(error);
