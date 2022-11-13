@@ -19,16 +19,15 @@ import { useLocalStorage } from 'react-use';
 function Home() {
 
     const [content, setContent] = useState("");
+
     const [postsComments, setPostsComments] = useState();
     const [isLoggedIn, setIsLoggIn] = useLocalStorage('isLoggedIn');
 
 
     const selectPostsComments = async () => {
-
         try {
             const posts = await listApprovedPosts();
             const comments = await getComments();
-
             const result = posts.data.map(post => {
                 return {
                     ...post,
@@ -37,6 +36,7 @@ function Home() {
             })
             setPostsComments(result)
             console.log(result)
+          
         } catch (error) {
             console.log(error)
         }
@@ -48,27 +48,34 @@ function Home() {
     }, []);
 
 
-    const handleComment = async (e) => {
+    const handleComment = async (e, key) => {
 
         const formData = {}
         formData.user_id = localStorage.getItem("user_id");
         formData.post_id = e.target.id;
-        formData.content = content;
+        formData.content = content;       
         console.log(formData)
         const response = await createComment(formData)
-        if (response.status === 200) {
-            console.log(response)
-        }
+     
+
+        const updatedPostsComments = postsComments.map(post => {
+            if (post.id == formData.post_id) {            
+              post.comments = [...post.comments, {content: content, nombre: 'pepe'}];    
+          
+          }
+          return post;
+          });
+          setPostsComments(updatedPostsComments);     
+
+      
     }
 
 
     return (
         <>
             <Header />
-
-
             {postsComments && postsComments.map((post) => (
-                <Center py={6} >
+                <Center py={6} key={post.id} >
 
                     <Box
                         maxW={'660px'}
@@ -106,7 +113,7 @@ function Home() {
                         </Text>
                         <Divider />
 
-                        {post.comments.map((comment) => (<Box ml='3'>
+                        {post.comments.map((comment,i) => (<Box ml='3' key={`${comment.id}+${i}`}>
                             <Text >
                                 <Badge
                                     rounded={"lg"}
