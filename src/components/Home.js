@@ -123,7 +123,7 @@ function Home() {
                         </Text>
 
                         <Accordion allowMultiple>
-                            <AccordionItem>
+                            <AccordionItem >
                                 <AccordionButton>
                                     <Box flex='1' textAlign='left'
                                         onClick={selectComments}
@@ -134,16 +134,26 @@ function Home() {
                                 </AccordionButton>
                                 {comments && showResults && comments.reverse().map((comment) => (     
                                     <Box ml='3'>
-                                        <Text fontWeight='bold'>
-                                            <Badge ml='1' colorScheme='green'>
+                                        <Text >
+                                            <Badge 
+                                            rounded={"lg"}
+                                            fontSize={"sm"}
+                                            py={1}
+                                           px={4}
+                                           my={2}
+                                            colorScheme='green'>
                                             {comment.nombre}
                                             </Badge>
                                         </Text>
-                                        <Text fontSize='sm'> {comment.content}</Text>
+                                        <Text 
+                                        fontWeight='bold'
+                                         fontSize='xl'
+                                         mb={3}> {comment.content}
+                                         </Text>
                                     </Box>
                                     
                                 ))}
-                            </AccordionItem>
+                            </AccordionItem >
                         </Accordion>
 
                         <Box bg={'gray.200'}
