@@ -204,7 +204,7 @@ function EditForm() {
                           w='100%'
                           h='45'
                           mb='24px'
-                          onClick={() => navigate("/listar_post_editables")}
+                          onClick={() => navigate("/")}
                           _hover={{
                             bg: "teal.200",
                           }}
