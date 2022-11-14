@@ -51,13 +51,11 @@ function EditForm() {
         setPost(res.data)       
       }
     } catch (error) {
-      console.log(error)
     }
   };
   useEffect(() => {
     selectPosts()
   }, []);
-
 
   const messageError = (message) => {
     if (!toast.isActive(toastIdRef.current))

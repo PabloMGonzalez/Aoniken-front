@@ -1,4 +1,3 @@
-//export const BASE_URL = "https://autentica.bahia.gob.ar/";
 export const BASE_URL = "https://localhost:7020/";
 
 

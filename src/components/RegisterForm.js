@@ -75,8 +75,6 @@ function SignUp() {
       const response = await register(formData)
       if (response.status === 200) {
         onOpen()
-
-        // navigates
       }
       else {
         messageError("Error: Email ya registrado.")
@@ -121,7 +119,6 @@ function SignUp() {
       })
   }
 
-  // Chakra color mode
   const titleColor = useColorModeValue("blue.800", "teal.200");
   const textColor = useColorModeValue("gray.400", "white");
 
