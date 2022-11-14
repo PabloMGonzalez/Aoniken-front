@@ -1,6 +1,4 @@
 import axios from 'axios';
-import createAuthRefreshInterceptor from 'axios-auth-refresh';
-import { BASE_URL } from "./urls";
 
 export const axiosLoggedInConfig = () => {
   const axiosService = axios.create({

@@ -40,7 +40,6 @@ export const login = async (data) => {
     const response = await axiosLoggedInConfig().post(loginURL, data);
     localStorage.setItem("isLoggedIn", true);
     localStorage.setItem("lgac", response.data.result);
-    localStorage.setItem("lgrf", response.data.result);
     localStorage.setItem("user_id", response.data.id);
     localStorage.setItem("role", response.data.role);
     localStorage.setItem("nombre", response.data.nombre);
@@ -54,8 +53,9 @@ export const logout = async () => {
   try {
     localStorage.setItem("isLoggedIn", false);
     localStorage.setItem("lgac", "null");
-    localStorage.setItem("lgrf", "null");
     localStorage.setItem("user_id", "null");
+    localStorage.setItem("role", "null");
+    localStorage.setItem("nombre", "null");
   } catch (error) {
     console.log(error);
   }

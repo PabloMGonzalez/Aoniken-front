@@ -6,15 +6,12 @@ import {
     Text,
     Box,
     Divider,
-    useDisclosure,
-    useColorModeValue,
-    useToast
 
 } from "@chakra-ui/react";
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Header from './Header.js';
 import { useNavigate } from 'react-router-dom';
-import { editPost, listUnapprovedPosts } from '../utilities/loaders.js';
+import { listUnapprovedPosts } from '../utilities/loaders.js';
 
 
 const ListEditable = () => {
