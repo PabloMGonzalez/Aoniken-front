@@ -1,70 +1,43 @@
-# Getting Started with Create React App
+# Aoniken blog frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**Aoniken blog frontend** es la solución a un challenge hecho para la compañia **Aoniken** 
+el **Frontend** esta realizado en ReactJs, utilizando Chakra UI para componentes y axios para las peticiones al servidor
 
-## Available Scripts
+## Prerrequisitos para su funcionamiento
+1. Windows o Linux
+2. Visual Studio Code (recomendado) o algun IDE de su gusto
+4. Git
+5. node package manager (npm)
+6. Chrome, Firefox, etc.
 
-In the project directory, you can run:
+## Instalación en Linux O Windows
 
-### `npm start`
+#### 1º Paso Repositorio
+Clonar el repositorio en la maquina local con la terminalytT
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+    git clone  https://github.com/PabloMGonzalez/Aoniken-front.git
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+#### 2º Paso Dependencias
+1. Abrir el repositorio en Visual Studio Code
+2. Abrir una terminal y correr el siguiente comando para instalar las dependencias
 
-### `npm test`
+<pre> npm install </pre>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+#### 3º Paso Correr servidor local
+1. En la terminal correr el siguiente comando
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<pre> npm start </pre>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. Se abrira una ventana en http://localhost:3000/ donde esta alojada la web
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+#### SOFTWARE UTILIZADO
+- React
+- Axios
+- Chakra UI
+- node package manager
+- Visual Studio Code
+- Chrome
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**Horas requeridas:** 80 aprox
