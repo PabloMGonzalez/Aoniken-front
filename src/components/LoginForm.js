@@ -92,7 +92,6 @@ export default function LoginForm() {
       const res = await login(formData);
       setLoading(false);
       if (res.data.success) {
-        console.log("Estado del logueo: " + localStorage.getItem("isLoggedIn"));
         navigate('/')
       }
 

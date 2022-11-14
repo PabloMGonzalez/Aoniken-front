@@ -17,7 +17,6 @@ export default function Header() {
 
   const handleLogout = () => {
     logout();
-    console.log("Estado del logueo: " + localStorage.getItem("isLoggedIn"));
     navigate('/login');
 
   }

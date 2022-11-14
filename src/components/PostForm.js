@@ -52,7 +52,6 @@ function PostForm() {
 
   const validateForm = () => {
     let isValid = true;
-    console.log(title)
 
     if (title === undefined) {
       isValid = false;
