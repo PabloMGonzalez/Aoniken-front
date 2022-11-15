@@ -38,10 +38,10 @@ el **Frontend** esta realizado en ReactJS, utilizando Chakra UI para componentes
 
 #### CREDENCIALES PARA INTERACTUAR CON LA WEB
 > writer@writer.com
-  password
+  pass
 
 >editor@editor.com
-password
+  pass
 
 cada vez que se cree un usuario nuevo sera Writer
 
